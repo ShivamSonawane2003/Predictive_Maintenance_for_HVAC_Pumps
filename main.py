@@ -1,35 +1,39 @@
+import streamlit as st
 import joblib
-from fastapi import FastAPI
-from pydantic import BaseModel
 import numpy as np
 
 # Load model and scaler
 model = joblib.load("best_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
-app = FastAPI()
+# Title
+st.title("🚨 Predictive Maintenance for HVAC Pumps")
 
-# Define input format
-class SensorInput(BaseModel):
-    sensor_1: float
-    sensor_2: float
-    sensor_3: float
-    sensor_4: float
-    sensor_5: float
-    sensor_6: float
-    sensor_7: float
-    sensor_8: float
-    sensor_9: float
-    sensor_10: float
+st.markdown("Enter sensor values to predict pump status:")
 
-@app.post("/predict")
-def predict(data: SensorInput):
-    input_data = np.array([[  # match your feature order
-        data.sensor_1, data.sensor_2, data.sensor_3, data.sensor_4, data.sensor_5,
-        data.sensor_6, data.sensor_7, data.sensor_8, data.sensor_9, data.sensor_10
+# Input form
+with st.form("input_form"):
+    sensor_1 = st.number_input("Sensor 1", value=0.0)
+    sensor_2 = st.number_input("Sensor 2", value=0.0)
+    sensor_3 = st.number_input("Sensor 3", value=0.0)
+    sensor_4 = st.number_input("Sensor 4", value=0.0)
+    sensor_5 = st.number_input("Sensor 5", value=0.0)
+    sensor_6 = st.number_input("Sensor 6", value=0.0)
+    sensor_7 = st.number_input("Sensor 7", value=0.0)
+    sensor_8 = st.number_input("Sensor 8", value=0.0)
+    sensor_9 = st.number_input("Sensor 9", value=0.0)
+    sensor_10 = st.number_input("Sensor 10", value=0.0)
+    
+    submit = st.form_submit_button("Predict")
+
+if submit:
+    input_data = np.array([[
+        sensor_1, sensor_2, sensor_3, sensor_4, sensor_5,
+        sensor_6, sensor_7, sensor_8, sensor_9, sensor_10
     ]])
 
-    scaled = scaler.transform(input_data)
-    prediction = model.predict(scaled)
+    scaled_data = scaler.transform(input_data)
+    prediction = model.predict(scaled_data)[0]
 
-    return {"prediction": int(prediction[0])}
+    label_map = {0: "NORMAL", 1: "RECOVERING", 2: "BROKEN"}
+    st.success(f"🔧 Prediction: **{label_map.get(prediction, 'Unknown')}**")
