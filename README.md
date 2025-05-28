@@ -1,5 +1,10 @@
 # 🛠️ Predictive Maintenance for HVAC Pumps Using Pump Sensor Data
 
+
+# Deployment on Render Link
+
+# https://predictive-maintenance-for-hvac-pumps.onrender.com
+
 ## 📌 Objective
 This project aims to **predict failures in HVAC pumps** using pump sensor data. Predictive maintenance reduces downtime, prevents costly repairs, and improves energy efficiency by identifying early signs of failure from sensor behavior.
 
@@ -96,3 +101,21 @@ FastAPI is used to deploy a lightweight REST API that provides real-time predict
 1. **Install dependencies**:
    ```bash
    pip install fastapi uvicorn joblib scikit-learn xgboost
+## 🌐 Deploying FastAPI App on Render (Free Hosting)
+
+You can deploy this FastAPI app online using [Render](https://render.com), which offers free tier hosting for web services.
+
+### 📝 Prerequisites
+- A GitHub repository with the following files:
+  - `main.py` (your FastAPI app)
+  - `requirements.txt`
+  - `best_model.pkl`, `scaler.pkl`, `selector.pkl`
+
+---
+
+### 🚀 Step-by-Step Deployment on Render
+
+1. **Create `requirements.txt`** (if not already created):
+
+   ```bash
+   pip freeze > requirements.txt
