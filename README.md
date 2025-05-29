@@ -92,14 +92,15 @@ Saved the model and preprocessing objects using `joblib`:
 
 ---
 
-## ⚡ 6. FastAPI Deployment
+## ⚡ 6. Streamlit Deployment
 
-FastAPI is used to deploy a lightweight REST API that provides real-time predictions based on sensor input.
 
 ### 🚀 Step-by-Step Execution
 
 1. **Install dependencies**:
    ```bash
-   pip install fastapi uvicorn joblib scikit-learn xgboost
+   pip install streamlit joblib scikit-learn xgboost
 
    pip freeze > requirements.txt
+
+   Streamlit Run main.py
