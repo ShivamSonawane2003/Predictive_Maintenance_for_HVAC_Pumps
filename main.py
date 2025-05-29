@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import joblib
 
-# ✅ Correct typo in decorator
 @st.cache_resource
 def load_components():
     scaler = joblib.load("scaler.pkl")
